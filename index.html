@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Mother's Day</title>
+  <style>
+    /* ==== Reset & Base ==== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { width: 100%; height: 100%; font-family: 'Segoe UI', sans-serif; background: #fff; overflow: hidden; }
+
+    /* ==== Splash Screen ==== */
+    #splash {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('flowers.png') center/cover no-repeat;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      color: #fff; text-align: center;
+    }
+    .fade-in { animation: fadeIn 2s forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .slide-up { animation: slideUp 1.5s forwards; opacity: 0; }
+    @keyframes slideUp { from { transform: translateY(40px); } to { transform: translateY(0); opacity: 1; } }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #F5E1DA;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6), -2px -2px 4px rgba(0,0,0,0.6);
+      margin-bottom: 0.5rem;
+    }
+    p.signature {
+      font-size: 1.2rem;
+      color: #F0C8C6;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.8);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      margin-bottom: 0.5rem;
+    }
+
+    #open-btn {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      background: transparent;
+      border: 2px solid #F5E1DA;
+      border-radius: 5px;
+      color: #F5E1DA;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 1s ease-in, background 0.3s, color 0.3s;
+    }
+    #open-btn:hover {
+      background: rgba(245,225,218,0.8);
+      color: #333;
+    }
+
+    /* ==== Letter Screen ==== */
+    #letter-container {
+      display: none;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow-y: auto;
+      padding: 2rem 1rem;
+      background: url('sunset.png') center/cover no-repeat;
+      background-color: #fff0f5;
+      color: #333;
+      backdrop-filter: brightness(0.9);
+    }
+    #letter-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #FFDAB9;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    #letter {
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      background: rgba(255,255,255,0.85);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      color: #333;
+    }
+
+    /* ==== Footer ==== */
+    #footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 0.5rem 0;
+      background: transparent;
+      color: #F5E1DA;
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    @media (min-width: 600px) {
+      h1 { font-size: 3.5rem; }
+      #open-btn { font-size: 1.1rem; padding: 1rem 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Splash -->
+  <div id="splash">
+    <h1 class="fade-in" id="title">Happy Mother's Day Mom ❤️</h1>
+    <p class="slide-up signature" id="from">- Richie</p>
+    <button id="open-btn">Open Letter</button>
+  </div>
+
+  <!-- Letter & Audio -->
+  <div id="letter-container">
+    <h2>A Letter to My Mom</h2>
+    <div id="letter">
+      Dear Mom,
+      <br><br>
+      Happy Mother’s Day to the most incredible woman I know. Today, I want to thank you from the bottom of my heart for all the love, sacrifices, and wisdom you’ve poured into me. You are not just my mother—you’re my guiding star, my rock, and my inspiration in every step I take.
+      <br><br>
+      I know times may be hard right now, and we’ve both faced challenges that sometimes seem overwhelming. But please remember, we have each other—and together, there is nothing we cannot overcome. These bumps in the road are lessons in disguise. We will learn, grow, and emerge stronger, side by side, building a peaceful and joyful future as a family.
+      <br><br>
+      Your kindness, strength, and unwavering belief in me keep me going even when life feels tough. Thank you for those late-night talks, the warm hugs, and the countless little ways you show your love every single day. I am truly blessed to call you my mom.
+      <br><br>
+      So today, I hope you can relax, smile, and feel how deeply you are loved—not just by me, but by everyone whose life you’ve touched. You deserve all the happiness in the world and more.
+      <br><br>
+      With all my love,
+      <br>
+      <strong>Richie</strong>
+    </div>
+    <audio id="bg-music" src="music.mp3" preload="auto"></audio>
+  </div>
+
+  <!-- Footer Date -->
+  <div id="footer">05/11/25</div>
+
+  <script>
+    window.addEventListener('load', () => {
+      document.getElementById('title').classList.add('fade-in');
+      document.getElementById('from').classList.add('slide-up');
+      setTimeout(() => {
+        const btn = document.getElementById('open-btn');
+        btn.style.opacity = '1';
+      }, 4000);
+    });
+
+    document.getElementById('open-btn').addEventListener('click', () => {
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('letter-container').style.display = 'block';
+      const music = document.getElementById('bg-music');
+      music.currentTime = 0;
+      music.play();
+    });
+  </script>
+
+</body>
+</html>
